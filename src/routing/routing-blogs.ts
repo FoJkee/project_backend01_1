@@ -2,11 +2,11 @@ import {Request, Response, Router} from "express";
 import {blogsType, Error} from "../types/types";
 
 
-const date = +(new Date())
+export const date = +(new Date())
 
 export const blogs: blogsType[] = []
 
-const errors: Error[] = []
+export const errors: Error[] = []
 
 export const routingBlogs = Router()
 routingBlogs.get('/', (req: Request, res: Response) => {
