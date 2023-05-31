@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express";
-import {routingBlogs} from "./routing-blogs";
+
 
 export const routingPosts = Router()
 routingPosts.get('/', (req: Request, res: Response) => {
