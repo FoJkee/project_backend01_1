@@ -1,8 +1,23 @@
-import {Request, Response} from "express";
+import express, {Request, Response} from "express";
+import {testingRouter} from "./routing/routing-testing";
+import {routingPosts} from "./routing/routing-posts";
+import {routingBlogs} from "./routing/routing-blogs";
 
-const express = require('express')
+
+
+
 const app = express()
-const port = 3000
+const port = process.env.PORT || 4000
+
+const parserMiddleware = express.json()
+app.use(parserMiddleware)
+
+
+
+app.use('/blogs', routingBlogs)
+app.use('/posts', routingPosts)
+app.use('/testing', testingRouter)
+
 
 app.get('/', (req:Request, res:Response) => {
     res.send('Hello World!!!')
