@@ -1,96 +1,45 @@
 import {Request, Response, Router} from "express";
 import {blogsType, Error} from "../types/types";
+import {repositoryBlogs} from "../repositories/blogs-repositories";
 
-
-export const date = +(new Date())
-
-export const blogs: blogsType[] = []
 
 export const errors: Error[] = []
 
 export const routingBlogs = Router()
 routingBlogs.get('/', (req: Request, res: Response) => {
-    res.status(200).send(blogs)
+    const blogsGet = repositoryBlogs.findBlogs()
+    res.status(200).send(blogsGet)
 })
 routingBlogs.post('/', (req: Request, res: Response) => {
 
 //Unauthorized????
 
-    const {id, name, description, websiteUrl} = req.body
 
-    if (!(typeof (id) === "string") || !(typeof (name) === "string")
-        || !(typeof (description) === "string")
-        || !(typeof (websiteUrl) === "string")) {
-
-        errors.push({
-            message: "string",
-            field: "string"
-        })
-    }
-    if (errors.length > 0) {
-        res.status(400).send({errorsMessages: errors})
-        return
-    }
-
-    const blogsPost: blogsType = {
-        id: date.toString(),
-        name: name,
-        description: description,
-        websiteUrl: websiteUrl
-    }
-    blogs.push(blogsPost)
-    res.status(201).json(blogsPost)
-
+    const newBlogs = repositoryBlogs.createBlogs(req.body.name, req.body.description,
+        req.body.websiteUrl)
+    res.status(201).json(newBlogs)
 })
 routingBlogs.get('/:id', (req: Request, res: Response) => {
-    const blogsGet = blogs.find(el => el.id === req.params.id)
-    if (!blogsGet) {
-        res.status(404)
-        return
-    }
-    res.status(200).json(blogsGet)
+    const blogsGetId = repositoryBlogs.findBlogsId(req.params.id)
+    blogsGetId ? res.status(200).json(blogsGetId) : res.status(404)
 
 })
 routingBlogs.put('/:id', (req: Request, res: Response) => {
     //Unauthorized????
-
-    const blogsPut = blogs.find(el => el.id === req.params.id)
-
-    if (!blogsPut) {
+    const blogsPut = repositoryBlogs.updateBlogs(req.params.id, req.body.name,
+        req.body.description, req.body.websiteUrl)
+    if (blogsPut) {
+        const blogsPutId = repositoryBlogs.findBlogsId(req.params.id)
+        res.status(204).send(blogsPutId)
+    } else {
         res.status(404)
-        return;
     }
-
-    const {name, description, websiteUrl} = req.body
-
-    if (!(typeof (name) === "string")
-        || !(typeof (description) === "string")
-        || !(typeof (websiteUrl) === "string")) {
-
-        errors.push({
-            message: "string",
-            field: "string"
-        })
-    }
-    if (errors.length > 0) {
-        res.status(400).send({errorsMessages: errors})
-        return
-    }
-    blogsPut.name = name
-    blogsPut.description = description
-    blogsPut.websiteUrl = websiteUrl
-
-    res.status(204)
 
 })
 routingBlogs.delete('/:id', (req: Request, res: Response) => {
     //Unauthorized????
+const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
+    deleteBlogs ? res.status(204) : res.status(404)
 
-    for (let i = 0; i < blogs.length; i++) {
-        if (blogs[i].id === req.params.id) {
-            blogs.splice(i, 1)
-            res.status(204)
-        }
-    }
-    res.status(404)
+
 })
