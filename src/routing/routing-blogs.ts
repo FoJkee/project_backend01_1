@@ -1,19 +1,16 @@
 import {Request, Response, Router} from "express";
-import {blogsType, Error} from "../types/types";
 import {repositoryBlogs} from "../repositories/blogs-repositories";
+import {authorize} from "../middleware/authorize";
 
 
-export const errors: Error[] = []
+
 
 export const routingBlogs = Router()
 routingBlogs.get('/', (req: Request, res: Response) => {
     const blogsGet = repositoryBlogs.findBlogs()
     res.status(200).send(blogsGet)
 })
-routingBlogs.post('/', (req: Request, res: Response) => {
-
-//Unauthorized????
-
+routingBlogs.post('/', authorize, (req: Request, res: Response) => {
 
     const newBlogs = repositoryBlogs.createBlogs(req.body.name, req.body.description,
         req.body.websiteUrl)
@@ -24,7 +21,7 @@ routingBlogs.get('/:id', (req: Request, res: Response) => {
     blogsGetId ? res.status(200).json(blogsGetId) : res.status(404)
 
 })
-routingBlogs.put('/:id', (req: Request, res: Response) => {
+routingBlogs.put('/:id',authorize, (req: Request, res: Response) => {
     //Unauthorized????
     const blogsPut = repositoryBlogs.updateBlogs(req.params.id, req.body.name,
         req.body.description, req.body.websiteUrl)
@@ -36,7 +33,7 @@ routingBlogs.put('/:id', (req: Request, res: Response) => {
     }
 
 })
-routingBlogs.delete('/:id', (req: Request, res: Response) => {
+routingBlogs.delete('/:id',authorize, (req: Request, res: Response) => {
     //Unauthorized????
 const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
     deleteBlogs ? res.status(204) : res.status(404)

@@ -1,6 +1,8 @@
 import {Request, Response, Router} from "express";
 import {query} from "express-validator";
-import {blogs} from "./routing-blogs";
+import {repositoryPosts} from "../repositories/posts-repositories";
+import {blogs} from "../repositories/blogs-repositories";
+
 
 
 export const testingRouter = Router()

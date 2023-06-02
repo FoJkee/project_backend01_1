@@ -2,17 +2,22 @@ import express, {Request, Response} from "express";
 import {testingRouter} from "./routing/routing-testing";
 import {routingPosts} from "./routing/routing-posts";
 import {routingBlogs} from "./routing/routing-blogs";
-
+import {authorize} from "./middleware/authorize";
+import bodyParser from "body-parser";
 
 
 
 const app = express()
+app.use(bodyParser())
+
 const port = process.env.PORT || 4000
 
+
 const parserMiddleware = express.json()
+
 app.use(parserMiddleware)
 
-
+app.use(authorize)
 
 app.use('/blogs', routingBlogs)
 app.use('/posts', routingPosts)

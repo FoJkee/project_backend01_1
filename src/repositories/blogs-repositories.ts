@@ -1,6 +1,6 @@
 import {blogsType} from "../types/types";
 
-const blogs: blogsType[] = []
+export const blogs: blogsType[] = []
 const date = new Date()
 
 export const repositoryBlogs = {
