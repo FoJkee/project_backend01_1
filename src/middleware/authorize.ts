@@ -1,10 +1,11 @@
 import {NextFunction, Request, Response} from "express";
 
-
 export const authorize = (req: Request, res: Response, next: NextFunction) => {
-    if(req.headers.authorization === "Basic YWRtaW46cXdlcnR5"){
-        next()
-    } else {
-        res.status(401)
-    }
+
+    const code = Buffer.from('admin:qwerty').toString('base64')
+
+    if (req.headers.authorization === `Basic ${code}`) next()
+
+    res.status(401)
+
 }
