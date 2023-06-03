@@ -1,7 +1,7 @@
 import {postsType} from "../types/types";
 
 
-const posts: postsType[] = []
+export const posts: postsType[] = []
 const date = new Date()
 export const repositoryPosts = {
 

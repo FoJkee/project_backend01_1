@@ -18,3 +18,4 @@ export type postsType = {
         blogId: string,
         blogName: string
 }
+
