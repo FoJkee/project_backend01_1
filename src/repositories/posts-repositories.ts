@@ -11,15 +11,14 @@ export const repositoryPosts = {
     },
 
     createPosts(title: string, shortDescription: string,
-                content: string, blogId: string, blogName: string) {
+                content: string, blogId: string) {
 
         const postsPost = {
             id: (+date).toString(),
             title: title,
             shortDescription: shortDescription,
             content: content,
-            blogId: blogId,
-            blogName: blogName,
+            blogId: blogId
         }
 
         posts.push(postsPost)

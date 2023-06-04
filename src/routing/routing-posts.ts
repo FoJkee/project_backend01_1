@@ -17,8 +17,7 @@ routingPosts.get('/', (req: Request, res: Response) => {
 routingPosts.post('/', authorizeMiddleware, postMaddleware, blogidMiddleware, errorsMessages,(req: Request, res: Response) => {
 
     const newPosts = repositoryPosts.createPosts(req.body.title,
-        req.body.shortDescription, req.body.content, req.body.blogId,
-        req.body.blogName)
+        req.body.shortDescription, req.body.content, req.body.blogId)
     res.status(201).json(newPosts)
 
 })
