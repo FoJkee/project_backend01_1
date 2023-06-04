@@ -12,9 +12,9 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
         }
     }
 
-    const result = validationResult(req).formatWith(errMes).array({onlyFirstError: true})
-    if (result) {
-        res.status(400).json({errorsMessages: result});
+    const result = validationResult(req).formatWith(errMes)
+    if (!result.isEmpty()) {
+        res.status(400).json(result.array());
     } else {
         next()
     }
