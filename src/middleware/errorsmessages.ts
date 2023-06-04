@@ -7,6 +7,7 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
     // @ts-ignore
     const errMes = ({msg, path} : ValidationError) => {
         return {
+
             message: msg,
             field: path
         }
