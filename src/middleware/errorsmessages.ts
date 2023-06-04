@@ -4,10 +4,11 @@ import {ValidationError, validationResult} from "express-validator";
 
 export const errorsMessages = (req: Request, res: Response, next: NextFunction) => {
 
-    const errMes = ({msg, type} : ValidationError) => {
+    // @ts-ignore
+    const errMes = ({msg, path} : ValidationError) => {
         return {
             message: msg,
-            field: type
+            field: path
         }
     }
 
