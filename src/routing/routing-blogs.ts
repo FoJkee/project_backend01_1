@@ -6,7 +6,7 @@ import {blogsMiddleware} from "../middleware/blogs-middleware";
 
 
 export const routingBlogs = Router()
-routingBlogs.get('/',authorizeMiddleware, (req: Request, res: Response) => {
+routingBlogs.get('/', (req: Request, res: Response) => {
     const blogsGet = repositoryBlogs.findBlogs()
     res.status(200).send(blogsGet)
 })
@@ -17,7 +17,7 @@ routingBlogs.post('/', authorizeMiddleware, blogsMiddleware, errorsMessages,
             req.body.websiteUrl)
         res.status(201).json(newBlogs)
     })
-routingBlogs.get('/:id',authorizeMiddleware, (req: Request, res: Response) => {
+routingBlogs.get('/:id', (req: Request, res: Response) => {
     const blogsGetId = repositoryBlogs.findBlogsId(req.params.id)
     blogsGetId ? res.status(200).json(blogsGetId) : res.status(404)
 
@@ -37,9 +37,13 @@ routingBlogs.put('/:id', authorizeMiddleware, blogsMiddleware, errorsMessages,
 routingBlogs.delete('/:id', authorizeMiddleware,(req: Request, res: Response) => {
 
     const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
-    deleteBlogs ? res.status(204) : res.status(404)
 
+    if (!deleteBlogs) {
+        res.status(404)
+        return
+    }
 
+    res.status(204)
 
 
 })

@@ -1,4 +1,5 @@
 import {postsType} from "../types/types";
+import {blogs} from "./blogs-repositories";
 
 
 export const posts: postsType[] = []
@@ -59,6 +60,9 @@ export const repositoryPosts = {
             }
         }
         return false
+    },
+    deletePostsAll(){
+        posts.splice(0)
     }
 
 }
