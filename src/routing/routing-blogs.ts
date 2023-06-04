@@ -18,7 +18,7 @@ routingBlogs.post('/', authorize, blogsMiddleware, errorsMessages,
             req.body.websiteUrl)
         res.status(201).json(newBlogs)
     })
-routingBlogs.get('/:id',authorize, (req: Request, res: Response) => {
+routingBlogs.get('/:id', (req: Request, res: Response) => {
     const blogsGetId = repositoryBlogs.findBlogsId(req.params.id)
     blogsGetId ? res.status(200).json(blogsGetId) : res.status(404)
 

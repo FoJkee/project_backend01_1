@@ -7,7 +7,6 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
     // @ts-ignore
     const errMes = ({msg, path} : ValidationError) => {
         return {
-
             message: msg,
             field: path
         }
@@ -15,7 +14,7 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
 
     const result = validationResult(req).formatWith(errMes)
     if (!result.isEmpty()) {
-        res.status(400).json(result.array());
+        res.status(400).json({errorsMessages:result.array()});
     } else {
         next()
     }
