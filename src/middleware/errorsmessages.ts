@@ -1,11 +1,10 @@
 import {Response, Request, NextFunction} from "express";
-import {ValidationError, validationResult} from "express-validator";
+import {validationResult} from "express-validator";
 
 
 export const errorsMessages = (req: Request, res: Response, next: NextFunction) => {
 
-    // @ts-ignore
-    const errMes = ({msg, path} : ValidationError) => {
+    const errMes = ({msg, path} : any) => {
         return {
             message: msg,
             field: path
@@ -14,7 +13,7 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
 
     const result = validationResult(req).formatWith(errMes)
     if (!result.isEmpty()) {
-        res.status(400).json({errorsMessages:result.array()});
+        res.status(400).json({errorsMessages:result.array({onlyFirstError: true})});
     } else {
         next()
     }

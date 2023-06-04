@@ -1,8 +1,8 @@
-import {body} from "express-validator";
+import {body, ValidationChain} from "express-validator";
 import {repositoryBlogs} from "../repositories/blogs-repositories";
 
 
-export const blogidMiddleware = body('blogId').custom((value) => {
+export const blogidMiddleware: ValidationChain = body('blogId').custom((value) => {
 const blogId = repositoryBlogs.findBlogs()
-  return  blogId.filter((id, index)  => value === blogId[index].id)
+  return  blogId.find((id, index)  => value === blogId[index].id)
 })
