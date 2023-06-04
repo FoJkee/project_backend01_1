@@ -25,7 +25,6 @@ routingBlogs.get('/:id', (req: Request, res: Response) => {
 })
 routingBlogs.put('/:id', authorize, blogsMiddleware, errorsMessages,
     (req: Request, res: Response) => {
-    //Unauthorized????
     const blogsPut = repositoryBlogs.updateBlogs(req.params.id, req.body.name,
         req.body.description, req.body.websiteUrl)
     if (blogsPut) {
@@ -37,7 +36,7 @@ routingBlogs.put('/:id', authorize, blogsMiddleware, errorsMessages,
 
 })
 routingBlogs.delete('/:id', authorize, (req: Request, res: Response) => {
-    //Unauthorized????
+
     const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
     deleteBlogs ? res.status(204) : res.status(404)
 
