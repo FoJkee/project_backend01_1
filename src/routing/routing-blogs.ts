@@ -20,7 +20,6 @@ routingBlogs.post('/',authorizeMiddleware,  blogsMiddleware, errorsMessages,
 routingBlogs.get('/:id', (req: Request, res: Response) => {
     const blogsGetId = repositoryBlogs.findBlogsId(req.params.id)
     blogsGetId ? res.status(200).json(blogsGetId) : res.sendStatus(404)
-
 })
 routingBlogs.put('/:id', authorizeMiddleware, blogsMiddleware, errorsMessages,
     (req: Request, res: Response) => {
