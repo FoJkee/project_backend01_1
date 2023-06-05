@@ -38,7 +38,7 @@ routingPosts.put('/:id',  postMaddleware, blogidMiddleware,errorsMessages,(req: 
     }
 
 })
-routingPosts.delete('/:id' ,blogidMiddleware, (req: Request, res: Response) => {
+routingPosts.delete('/:id', (req: Request, res: Response) => {
 
     const postDelete = repositoryPosts.deletePosts(req.params.id)
     postDelete ? res.status(204) : res.status(404)
