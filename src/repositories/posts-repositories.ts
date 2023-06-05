@@ -1,5 +1,4 @@
 import {postsType} from "../types/types";
-import {blogs} from "./blogs-repositories";
 
 
 export const posts: postsType[] = []
@@ -11,14 +10,15 @@ export const repositoryPosts = {
     },
 
     createPosts(title: string, shortDescription: string,
-                content: string, blogId: string) {
+                content: string, blogId: string, blogName: string) {
 
         const postsPost = {
             id: (+date).toString(),
             title: title,
             shortDescription: shortDescription,
             content: content,
-            blogId: blogId
+            blogId: blogId,
+            blogName: blogName
         }
 
         posts.push(postsPost)
@@ -27,19 +27,13 @@ export const repositoryPosts = {
     },
 
     findPostsId(id: string) {
-        if (id) {
             let findGetId = posts.find(el => el.id === id)
             return findGetId
-        } else {
-            return posts
-        }
     },
 
     updatePosts (id: string, title: string, shortDescription: string,
                  content: string, blogId: string){
-
         const postsPut = posts.find(el => el.id === id)
-
         if (postsPut) {
             postsPut.title = title
             postsPut.shortDescription = shortDescription

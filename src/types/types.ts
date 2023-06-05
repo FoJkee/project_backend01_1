@@ -1,4 +1,3 @@
-
 export type blogsType = {
     id: string,
     name: string,
@@ -11,10 +10,11 @@ export type Error = {
     field: string,
 }
 export type postsType = {
-        id: string,
-        title: string,
-        shortDescription: string,
-        content: string,
-        blogId: string,
+    id: string,
+    title: string,
+    shortDescription: string,
+    content: string,
+    blogId: string,
+    blogName: string
 }
 
