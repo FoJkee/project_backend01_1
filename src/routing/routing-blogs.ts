@@ -34,7 +34,7 @@ routingBlogs.put('/:id',  blogsMiddleware, errorsMessages,
         }
 
     })
-routingBlogs.delete('/:id', (req: Request, res: Response) => {
+routingBlogs.delete('/:id', blogsMiddleware,(req: Request, res: Response) => {
 
     const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
 
