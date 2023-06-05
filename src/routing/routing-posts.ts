@@ -14,7 +14,7 @@ routingPosts.get('/', (req: Request, res: Response) => {
     res.status(200).json(postsGet)
 
 })
-routingPosts.post('/', authorizeMiddleware, postMaddleware, blogidMiddleware, errorsMessages,(req: Request, res: Response) => {
+routingPosts.post('/',  postMaddleware, blogidMiddleware, errorsMessages,(req: Request, res: Response) => {
 
     const newPosts = repositoryPosts.createPosts(req.body.title,
         req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
@@ -27,7 +27,7 @@ routingPosts.get('/:id', (req: Request, res: Response) => {
     postsGetId ? res.status(200).json(postsGetId) : res.status(404)
 
 })
-routingPosts.put('/:id', authorizeMiddleware, postMaddleware, blogidMiddleware,errorsMessages,(req: Request, res: Response) => {
+routingPosts.put('/:id',  postMaddleware, blogidMiddleware,errorsMessages,(req: Request, res: Response) => {
     const putBlogs = repositoryPosts.updatePosts(req.params.id, req.body.title,
         req.body.shortDescription, req.body.content, req.body.blogId)
     if (putBlogs) {
@@ -38,7 +38,7 @@ routingPosts.put('/:id', authorizeMiddleware, postMaddleware, blogidMiddleware,e
     }
 
 })
-routingPosts.delete('/:id', authorizeMiddleware,blogidMiddleware, (req: Request, res: Response) => {
+routingPosts.delete('/:id' ,blogidMiddleware, (req: Request, res: Response) => {
 
     const postDelete = repositoryPosts.deletePosts(req.params.id)
     postDelete ? res.status(204) : res.status(404)

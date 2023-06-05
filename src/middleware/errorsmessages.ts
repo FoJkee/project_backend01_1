@@ -13,7 +13,7 @@ export const errorsMessages = (req: Request, res: Response, next: NextFunction) 
     }
         const result = validationResult(req).formatWith(errMes)
         if (!result.isEmpty()) {
-           res.status(400).json({errorsMessages: result.array()});
+           res.status(400).json({errorsMessages: result.array({onlyFirstError:true})});
         } else {
             next()
         }

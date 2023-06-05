@@ -10,7 +10,7 @@ routingBlogs.get('/', (req: Request, res: Response) => {
     const blogsGet = repositoryBlogs.findBlogs()
     res.status(200).send(blogsGet)
 })
-routingBlogs.post('/', authorizeMiddleware, blogsMiddleware, errorsMessages,
+routingBlogs.post('/',  blogsMiddleware, errorsMessages,
     (req: Request, res: Response) => {
 
         const newBlogs = repositoryBlogs.createBlogs(req.body.name, req.body.description,
@@ -22,7 +22,7 @@ routingBlogs.get('/:id', (req: Request, res: Response) => {
     blogsGetId ? res.status(200).json(blogsGetId) : res.status(404)
 
 })
-routingBlogs.put('/:id', authorizeMiddleware, blogsMiddleware, errorsMessages,
+routingBlogs.put('/:id',  blogsMiddleware, errorsMessages,
     (req: Request, res: Response) => {
         const blogsPut = repositoryBlogs.updateBlogs(req.params.id, req.body.name,
             req.body.description, req.body.websiteUrl)
@@ -34,7 +34,7 @@ routingBlogs.put('/:id', authorizeMiddleware, blogsMiddleware, errorsMessages,
         }
 
     })
-routingBlogs.delete('/:id', authorizeMiddleware,(req: Request, res: Response) => {
+routingBlogs.delete('/:id', (req: Request, res: Response) => {
 
     const deleteBlogs = repositoryBlogs.deleteBlogs(req.params.id)
 
