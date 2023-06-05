@@ -1,5 +1,4 @@
 import {blogsType} from "../types/types";
-import {webcrypto} from "crypto";
 
 export const blogs: blogsType[] = []
 const date = new Date()
