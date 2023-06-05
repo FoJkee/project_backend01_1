@@ -4,7 +4,6 @@ import {postMaddleware} from "../middleware/post-maddleware";
 import {errorsMessages} from "../middleware/errorsmessages";
 import {blogidMiddleware} from "../middleware/blogid-middleware";
 import {authorizeMiddleware} from "../middleware/authorize";
-import {blogs} from "../repositories/blogs-repositories";
 
 export const routingPosts = Router()
 
@@ -26,7 +25,7 @@ routingPosts.post('/',authorizeMiddleware,  postMaddleware, blogidMiddleware, er
 routingPosts.get('/:id', (req: Request, res: Response) => {
 
     const postsGetId = repositoryPosts.findPostsId(req.params.id)
-    postsGetId ? res.status(200).json(postsGetId) : res.status(404)
+    postsGetId ? res.status(200).json(postsGetId) : res.sendStatus(404)
 
 })
 routingPosts.put('/:id',authorizeMiddleware,  postMaddleware, blogidMiddleware,errorsMessages,(req: Request, res: Response) => {
@@ -36,13 +35,13 @@ routingPosts.put('/:id',authorizeMiddleware,  postMaddleware, blogidMiddleware,e
         const putBlogsId = repositoryPosts.findPostsId(req.params.id)
         res.status(204).send(putBlogsId)
     } else {
-        res.status(404)
+        res.sendStatus(404)
     }
 
 })
 routingPosts.delete('/:id',authorizeMiddleware,postMaddleware, (req: Request, res: Response) => {
 
     const postDelete = repositoryPosts.deletePosts(req.params.id)
-    postDelete ? res.status(204) : res.status(404)
+    postDelete ? res.sendStatus(204) : res.sendStatus(404)
 
 })
