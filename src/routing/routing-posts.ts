@@ -4,6 +4,7 @@ import {postMaddleware} from "../middleware/post-maddleware";
 import {errorsMessages} from "../middleware/errorsmessages";
 import {blogidMiddleware} from "../middleware/blogid-middleware";
 import {authorizeMiddleware} from "../middleware/authorize";
+import {blogs} from "../repositories/blogs-repositories";
 
 export const routingPosts = Router()
 
@@ -16,6 +17,7 @@ routingPosts.get('/', (req: Request, res: Response) => {
 })
 routingPosts.post('/',  postMaddleware, blogidMiddleware, errorsMessages,(req: Request, res: Response) => {
 
+    console.log(req.body.blogName)
     const newPosts = repositoryPosts.createPosts(req.body.title,
         req.body.shortDescription, req.body.content, req.body.blogId, req.body.blogName)
     res.status(201).json(newPosts)

@@ -1,6 +1,10 @@
 import {blogsType} from "../types/types";
 
-export const blogs: blogsType[] = []
+const db: {blogs: blogsType[]} = {
+    blogs: []
+}
+
+export let blogs: blogsType[] = []
 const date = new Date()
 
 export const repositoryBlogs = {
@@ -38,13 +42,17 @@ export const repositoryBlogs = {
         }
     },
     deleteBlogs(id: string) {
-        for (let i = 0; i < blogs.length; i++) {
-            if (blogs[i].id=== id) {
-                blogs.splice(i, 1)
-                return true
-            }
-        }
-        return false
+        const blog = this.findBlogsId(id)
+        if(!blog) return null
+        blogs = blogs.filter(b => b.id !== id)
+        return true
+        // for (let i = 0; i < blogs.length; i++) {
+        //     if (blogs[i].id=== id) {
+        //         blogs.splice(i, 1)
+        //         return true
+        //     }
+        // }
+        // return false
     },
     deleteBlogsAll(){
         blogs.splice(0)
