@@ -50,13 +50,7 @@ export const repositoryPosts = {
         if (!post) return null
         posts = posts.filter(p => p.id !== id)
         return true
-        // for (let i = 0; i < posts.length; i++) {
-        //     if (posts[i].id === id) {
-        //         posts.splice(i, 0)
-        //         return true
-        //     }
-        // }
-        // return false
+
     },
     deletePostsAll(){
         posts.splice(0)

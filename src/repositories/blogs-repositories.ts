@@ -46,13 +46,7 @@ export const repositoryBlogs = {
         if(!blog) return null
         blogs = blogs.filter(b => b.id !== id)
         return true
-        // for (let i = 0; i < blogs.length; i++) {
-        //     if (blogs[i].id=== id) {
-        //         blogs.splice(i, 1)
-        //         return true
-        //     }
-        // }
-        // return false
+
     },
     deleteBlogsAll(){
         blogs.splice(0)
